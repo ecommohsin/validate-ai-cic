@@ -1,69 +1,186 @@
-import Image from "next/image";
+import { ButtonLink } from "@/components/ButtonLink";
+import { Card } from "@/components/Card";
+import { Container } from "@/components/Container";
+import { CtaSection } from "@/components/CtaSection";
+import { PlaceholderImage } from "@/components/PlaceholderImage";
+import { SectionHeading } from "@/components/SectionHeading";
+import { featureRoutes, internationalWork, whatWeDo } from "@/lib/content";
+import { photos } from "@/lib/images";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <>
+      <section className="bg-dark text-white">
+        <Container className="pt-20 pb-16 md:pt-28 md:pb-24">
+          <div className="max-w-4xl">
+            <h1 className="max-w-4xl font-serif text-[2.35rem] leading-[1.12] tracking-tight text-pretty sm:text-6xl md:text-7xl">
+              The independent platform for responsible AI and assurance
+            </h1>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-dark-muted md:text-lg">
+              Validate AI CIC convenes government, professional bodies,
+              academia, industry and practitioners to align perspectives, build
+              trusted relationships and develop practical solutions around a
+              common societal purpose.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/our-work-impact" variant="light">
+                Explore Our Work
+              </ButtonLink>
+              <ButtonLink href="/get-involved" variant="ghost">
+                Get Involved
+              </ButtonLink>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-dark pb-10 md:pb-16">
+        <Container>
+          <PlaceholderImage
+            src={photos.roundtable}
+            alt="Placeholder photograph of people in discussion around a table"
+            label="Placeholder image"
+            caption="A space for Forum photography from 30 April 2026 at Imperial College London."
+            priority
+          />
+        </Container>
+      </section>
+
+      <section className="border-b border-line py-20 md:py-28">
+        <Container>
+          <SectionHeading
+            eyebrow="What we do"
+            title="A neutral place to turn responsible AI into practice"
+            description="We do not represent a single profession, organisation or commercial interest. Our role is to bring people together, align perspectives and help develop practical approaches to AI assurance and trustworthy adoption."
+          />
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
+            {whatWeDo.map((item, index) => (
+              <div key={item.title}>
+                <PlaceholderImage
+                  src={
+                    [
+                      photos.workshop,
+                      photos.london,
+                      photos.university,
+                    ][index]
+                  }
+                  alt={`Placeholder photograph for ${item.title}`}
+                  caption={null}
+                  aspect="aspect-[5/3]"
+                />
+                <div className="mt-5 border-t border-line pt-6">
+                  <h3 className="font-serif text-2xl tracking-tight">{item.title}</h3>
+                  <p className="mt-3 text-[15px] leading-7 text-muted">{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20 md:py-28">
+        <Container>
+          <SectionHeading
+            eyebrow="Explore"
+            title="Three ways into the work"
+            description="Start with assurance, the 2026 risk perspective, or the record of Validate AI’s convening and impact."
+          />
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {featureRoutes.map((item) => (
+              <Card
+                key={item.href}
+                href={item.href}
+                title={item.title}
+                text={item.text}
+                image={item.image}
+                imageAlt={`Placeholder photograph for ${item.title}`}
+              />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-y border-line py-20 md:py-28">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <PlaceholderImage
+              src={photos.workshop}
+              alt="Placeholder photograph of a collaborative workshop"
+              label="Placeholder image"
+              caption="Placeholder for AI Assurance Forum photography."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <div>
+              <SectionHeading
+                eyebrow="AI Assurance Forum"
+                title="From dialogue to delivery"
+                description="On 30 April 2026, Validate AI CIC, Imperial College London, the Office for Statistics Regulation and ICAEW brought together more than 30 leaders and practitioners at Imperial College London."
+              />
+              <p className="mt-5 max-w-xl text-[15px] leading-7 text-muted">
+                The Forum is building a trusted, practical and scalable AI
+                assurance ecosystem — one that supports innovation while
+                protecting organisations, individuals and society.
+              </p>
+              <div className="mt-8">
+                <ButtonLink href="/ai-assurance#forum" variant="primary">
+                  Read about the Forum
+                </ButtonLink>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20 md:py-28">
+        <Container>
+          <SectionHeading
+            eyebrow="International reach"
+            title="UK work with a wider view"
+            description="Validate AI’s activity is rooted in the UK and reaches Europe and Asia through engagement on responsible AI, assurance, governance, human rights and professional practice."
+          />
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {internationalWork.map((item) => (
+              <article
+                key={item.place}
+                className="overflow-hidden rounded-2xl border border-line bg-white"
+              >
+                <PlaceholderImage
+                  src={item.image}
+                  alt={`Placeholder photograph suggesting ${item.place}`}
+                  caption={null}
+                  rounded={false}
+                  aspect="aspect-[16/8]"
+                />
+                <div className="p-6 md:p-7">
+                  <p className="text-sm text-muted">
+                    {item.place}
+                    <span className="mx-2 text-line">·</span>
+                    {item.date}
+                  </p>
+                  <h3 className="mt-3 font-serif text-2xl tracking-tight">
+                    {item.organisation}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-7 text-muted">
+                    {item.nature}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 max-w-2xl text-sm leading-6 text-muted">
+            These are areas of engagement, not a list of formal country offices
+            or exclusive partnerships.
+          </p>
+        </Container>
+      </section>
+
+      <CtaSection
+        title="Help shape a trusted AI assurance ecosystem"
+        description="We welcome organisations and individuals involved in developing, delivering, regulating, procuring, using or assuring AI systems."
+        primaryLabel="Get Involved"
+        primaryHref="/get-involved"
+        secondaryLabel="Contact us"
+        secondaryHref="mailto:contact@validateai.org"
+      />
+    </>
   );
 }
